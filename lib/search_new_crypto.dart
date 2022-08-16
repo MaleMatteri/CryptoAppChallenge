@@ -1,25 +1,24 @@
-import 'dart:ui';
-import 'crypto_search_list.dart';
-
+import 'package:crypto_app/add_new_crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'crypto_search_list.dart';
 
-class SecondRoute extends StatelessWidget {
-  const SecondRoute({Key? key}) : super(key: key);
+class SecondRoute2 extends StatelessWidget {
+  const SecondRoute2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: SearchWidget(title: "Search for a new crypto"),
-      theme: ThemeData(primarySwatch: Colors.orange),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Search a new crypto'),
+      ),
+      body: SearchWidget(),
     );
   }
 }
 
 class SearchWidget extends StatefulWidget {
-  const SearchWidget({Key? key, required this.title}) : super(key: key);
-
-  final String title;
+  const SearchWidget({Key? key}) : super(key: key);
 
   @override
   State<SearchWidget> createState() => _SearchWidgetState();
@@ -54,18 +53,6 @@ class _SearchWidgetState extends State<SearchWidget> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        leadingWidth: 100,
-        leading: ElevatedButton.icon(
-          onPressed: () => Navigator.of(context).pop(),
-          icon: const Icon(Icons.arrow_back),
-          label: const Text('Back'),
-          style: ElevatedButton.styleFrom(
-              elevation: 0, primary: Colors.transparent),
-        ),
-        title: Text(widget.title),
-      ),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -91,8 +78,7 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ? Center(
                       child: Text(
                       "No results were found",
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 22.0),
+                      style: TextStyle(fontSize: 22.0),
                     ))
                   : ListView.builder(
                       itemCount: display_list.length,
@@ -106,6 +92,11 @@ class _SearchWidgetState extends State<SearchWidget> {
                         ),
                         trailing: Text(
                             'USD ${display_list[index].usd_crypto_value!}'),
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const ThridRoute()),
+                        ),
                       ),
                     ),
             ),

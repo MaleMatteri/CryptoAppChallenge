@@ -1,5 +1,4 @@
-import 'package:crypto_app/add_new_crypto.dart';
-import 'package:crypto_app/second_view.dart';
+import 'package:crypto_app/search_new_crypto.dart';
 import 'package:flutter/material.dart';
 
 void main() {
