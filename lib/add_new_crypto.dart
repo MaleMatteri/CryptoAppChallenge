@@ -1,3 +1,5 @@
+import 'package:crypto_app/main.dart';
+import 'package:crypto_app/user_cryptos.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'crypto_search_list.dart';
@@ -42,14 +44,17 @@ class ThridRoute extends StatelessWidget {
             ),
             ElevatedButton.icon(
               onPressed: () {
-                // Respond to button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const MyHomePage()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(150, 60),
               ),
               icon: Icon(Icons.save, size: 25),
               label: Text("Save", style: TextStyle(fontSize: 20.0)),
-            )
+            ),
           ],
         ),
       ),
