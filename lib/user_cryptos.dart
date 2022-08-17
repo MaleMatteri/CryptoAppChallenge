@@ -8,10 +8,12 @@ import 'package:http/http.dart' as http;
 import 'crypto_value_model.dart';
 
 Future<CryptoValue> fetchUSDValue() async {
+  print("calling the value");
   final response = await http
       .get(Uri.parse('https://api.cryptapi.io/btc/convert/?value=1&from=usd'));
 
   if (response.statusCode == 200) {
+    print(response);
     return CryptoValue.fromJson(jsonDecode(response.body));
   } else {
     throw Exception("Fallo la conexion");
@@ -42,50 +44,38 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text("My cryptos"),
       ),
-      body: Center(
-        child: ListView.separated(
-            padding: const EdgeInsets.all(8),
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    Container(
-                      child: Text(
-                        '${listOfCryptos[index]}',
-                      ),
-                    ),
-                    Container(
-                      child: FutureBuilder<CryptoValue>(
-                        future: futureCryptoValue,
-                        builder: (context, snapshot) {
-                          if (snapshot.hasData) {
-                            return Text(snapshot.data!.usdValue);
-                          } else if (snapshot.hasError) {
-                            return Text('${snapshot.error}');
-                          }
-                          // By default, show a loading spinner.
-                          return const CircularProgressIndicator();
-                        },
-                      ),
-                    ),
-                    Container(
-                      child: FloatingActionButton(
-                          heroTag: Text("deleteCrypto"),
-                          child: Icon(Icons.delete),
-                          onPressed: null),
-                    ),
-                  ],
+      body: ListView.builder(
+          itemCount: listOfCryptos.length,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(
+                leading: Text(
+                  listOfCryptos[index],
                 ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) =>
-                const Divider(),
-            itemCount: FavCryptos.singleton.favCryptosList.length),
-      ),
+                trailing: FloatingActionButton(
+                    heroTag: index,
+                    mini: true,
+                    child: Icon(
+                      Icons.delete,
+                    ),
+                    onPressed: null),
+                title: FutureBuilder<CryptoValue>(
+                  future: futureCryptoValue,
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      return Text(
+                        "USD " + snapshot.data!.usdValue,
+                        textAlign: TextAlign.center,
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('${snapshot.error}');
+                    }
+                    // By default, show a loading spinner.
+                    return const LinearProgressIndicator();
+                  },
+                ));
+          }),
       floatingActionButton: FloatingActionButton(
-        heroTag: Text("addCrypto"),
+        heroTag: const Text("addCrypto"),
         onPressed: () => Navigator.push(
           context,
           MaterialPageRoute(builder: (context) => const SecondRoute2()),
