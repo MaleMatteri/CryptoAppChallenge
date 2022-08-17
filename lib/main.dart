@@ -1,6 +1,3 @@
-import 'dart:html';
-
-import 'package:crypto_app/search_new_crypto.dart';
 import 'package:crypto_app/user_cryptos.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: WelcomePage(),
+      home: const WelcomePage(),
       theme: ThemeData(primarySwatch: Colors.orange),
     );
   }
@@ -38,20 +35,23 @@ class _WelcomePageState extends State<WelcomePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Image(
-              image: AssetImage('crypto_logo.png'),
+              image: AssetImage('My_crypto_fav.png'),
             ),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(150, 60),
+            Hero(
+              tag: Text("screen1"),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(150, 60),
+                ),
+                icon: Icon(Icons.login, size: 25),
+                label: Text("Log in", style: TextStyle(fontSize: 20.0)),
               ),
-              icon: Icon(Icons.save, size: 25),
-              label: Text("Welcome!", style: TextStyle(fontSize: 20.0)),
             ),
           ],
         ),

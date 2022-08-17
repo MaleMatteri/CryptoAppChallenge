@@ -1,3 +1,6 @@
+import 'dart:html';
+
+import 'package:crypto_app/favcrypto_list_model.dart';
 import 'package:crypto_app/main.dart';
 import 'package:crypto_app/user_cryptos.dart';
 import 'package:flutter/foundation.dart';
@@ -5,7 +8,9 @@ import 'package:flutter/material.dart';
 import 'crypto_search_list.dart';
 
 class ThridRoute extends StatelessWidget {
-  const ThridRoute({Key? key}) : super(key: key);
+  const ThridRoute({Key? key, required this.cryptoName}) : super(key: key);
+
+  final String cryptoName;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +28,7 @@ class ThridRoute extends StatelessWidget {
               height: 20.0,
             ),
             Text(
-              "NombreDeLaCrypto",
+              cryptoName,
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(
@@ -42,18 +47,22 @@ class ThridRoute extends StatelessWidget {
             SizedBox(
               height: 20.0,
             ),
-            ElevatedButton.icon(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MyHomePage()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                minimumSize: Size(150, 60),
+            Hero(
+              tag: Text("screen3"),
+              child: ElevatedButton.icon(
+                onPressed: () {
+                  FavCryptos.singleton.favCryptosList.add(cryptoName);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  minimumSize: Size(150, 60),
+                ),
+                icon: Icon(Icons.save, size: 25),
+                label: Text("Save", style: TextStyle(fontSize: 20.0)),
               ),
-              icon: Icon(Icons.save, size: 25),
-              label: Text("Save", style: TextStyle(fontSize: 20.0)),
             ),
           ],
         ),

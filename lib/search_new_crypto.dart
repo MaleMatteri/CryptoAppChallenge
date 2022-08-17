@@ -88,14 +88,17 @@ class _SearchWidgetState extends State<SearchWidget> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         subtitle: Text(
-                          display_list[index].cypto_abbreviation!,
+                          display_list[index].crypto_abbreviation!,
                         ),
                         trailing: Text(
                             'USD ${display_list[index].usd_crypto_value!}'),
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => const ThridRoute()),
+                              builder: (context) => ThridRoute(
+                                    cryptoName: display_list[index]
+                                        .crypto_abbreviation!,
+                                  )),
                         ),
                       ),
                     ),
