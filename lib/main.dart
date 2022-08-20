@@ -12,7 +12,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: const WelcomePage(),
+      title: "First screen",
+      initialRoute: "/",
+      routes: {
+        '/': (context) => const WelcomePage(),
+        '/homescreen': (context) => const MyHomePage(),
+      },
+      // home: const WelcomePage(),
       theme: ThemeData(primarySwatch: Colors.orange),
     );
   }
@@ -41,10 +47,7 @@ class _WelcomePageState extends State<WelcomePage> {
               tag: Text("screen1"),
               child: ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyHomePage()),
-                  );
+                  Navigator.pushNamed(context, '/homescreen');
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(150, 60),

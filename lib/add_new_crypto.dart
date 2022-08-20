@@ -52,10 +52,8 @@ class ThridRoute extends StatelessWidget {
               child: ElevatedButton.icon(
                 onPressed: () {
                   FavCryptos.singleton.favCryptosList.add(cryptoName);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyHomePage()),
-                  );
+                  Navigator.popUntil(
+                      context, ModalRoute.withName('/homescreen'));
                 },
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(150, 60),

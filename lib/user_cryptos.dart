@@ -87,10 +87,18 @@ class _MyHomePageState extends State<MyHomePage> {
           }),
       floatingActionButton: FloatingActionButton(
         heroTag: const Text("addCrypto"),
-        onPressed: () => Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const SecondRoute2()),
-        ),
+        onPressed: () => {
+          print(ModalRoute.of(context)),
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const SecondRoute2(),
+                fullscreenDialog: true),
+          ).then((value) => setState(() {
+                listOfCryptos = FavCryptos.singleton.favCryptosList.toList();
+                futureCryptoValue = fetchAllUSDValues();
+              })),
+        },
         tooltip: 'Add',
         child: const Icon(Icons.add),
       ),

@@ -98,7 +98,8 @@ class _SearchWidgetState extends State<SearchWidget> {
                               builder: (context) => ThridRoute(
                                     cryptoName: display_list[index]
                                         .crypto_abbreviation!,
-                                  )),
+                                  ),
+                              fullscreenDialog: true),
                         ),
                       ),
                     ),
