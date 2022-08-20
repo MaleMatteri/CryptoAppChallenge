@@ -1,7 +1,7 @@
 class CryptoValue {
-  final String usdValue;
+  var usdValue = "";
 
-  const CryptoValue({
+  CryptoValue({
     required this.usdValue,
   });
 
