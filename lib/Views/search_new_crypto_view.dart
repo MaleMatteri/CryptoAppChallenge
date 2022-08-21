@@ -1,10 +1,10 @@
-import 'package:crypto_app/add_new_crypto.dart';
+import 'package:crypto_app/Views/add_new_crypto_view.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'crypto_search_list.dart';
+import '../Models/crypto_search_list_model.dart';
 
-class SecondRoute2 extends StatelessWidget {
-  const SecondRoute2({Key? key}) : super(key: key);
+class SearchNewCryptoView extends StatelessWidget {
+  const SearchNewCryptoView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -78,24 +78,24 @@ class _SearchWidgetState extends State<SearchWidget> {
                   ? Center(
                       child: Text(
                       "No results were found",
-                      style: TextStyle(fontSize: 22.0),
+                      style: TextStyle(fontSize: 22.0, color: Colors.grey),
                     ))
                   : ListView.builder(
                       itemCount: display_list.length,
                       itemBuilder: (context, index) => ListTile(
                         title: Text(
                           display_list[index].crypto_name!,
-                          style: TextStyle(fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         subtitle: Text(
                           display_list[index].crypto_abbreviation!,
                         ),
-                        trailing: Text(
-                            'USD ${display_list[index].usd_crypto_value!}'),
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ThridRoute(
+                              builder: (context) => AddNewCryptoView(
                                     cryptoName: display_list[index]
                                         .crypto_abbreviation!,
                                   ),

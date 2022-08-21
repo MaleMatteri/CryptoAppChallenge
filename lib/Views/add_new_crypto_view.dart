@@ -1,14 +1,10 @@
-import 'dart:html';
-
-import 'package:crypto_app/favcrypto_list_model.dart';
-import 'package:crypto_app/main.dart';
-import 'package:crypto_app/user_cryptos.dart';
+import 'package:crypto_app/Models/favcrypto_list_model.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'crypto_search_list.dart';
 
-class ThridRoute extends StatelessWidget {
-  const ThridRoute({Key? key, required this.cryptoName}) : super(key: key);
+class AddNewCryptoView extends StatelessWidget {
+  const AddNewCryptoView({Key? key, required this.cryptoName})
+      : super(key: key);
 
   final String cryptoName;
 
